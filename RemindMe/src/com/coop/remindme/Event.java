@@ -31,6 +31,24 @@ public class Event {
 		this._category = category;
 	}
 
+	public Event(String name, DateFormat event_start, String description, String location, DateFormat reminder, String frequency, String category){
+		this._name = name;
+		this._event_start = event_start;
+		this._description = description;
+		this._location = location;
+		this._reminder = reminder;
+		this._frequency = frequency;
+		this._category = category;
+	}
+	
+	//temp version that just takes teh basic info we have in the form.
+	public Event(String name, String description, String location, String category){
+		this._name = name;
+		this._description = description;
+		this._location = location;
+		this._category = category;
+	}
+	
 	// Get ID
 	public int getID(){
 		return this._id;
