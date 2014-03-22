@@ -6,10 +6,10 @@
     <string name="button_viewCategories">View Categories</string>
     <string name="button_createEvent">Create Event</string>
     <string name="logo">Project Logo</string>
-    <string name="Name_label">Name:</string>
-    <string name="Description_label">Description:</string>
-    <string name="Location_label">Location:</string>
-    <string name="Category_label">Category:</string>
+    <string name="Name_label">Name</string>
+    <string name="Description_label">Description</string>
+    <string name="Location_label">Location</string>
+    <string name="Category_label">Category</string>
     <string name="button_save">Save</string>
     <string name="button_cancel">Cancel</string>
 
