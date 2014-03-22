@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <string name="app_name">RemindMe</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="button_viewEvents">View Events</string>
+    <string name="button_viewCategories">View Categories</string>
+    <string name="button_createEvent">Create Event</string>
+    <string name="logo">Project Logo</string>
 
 </resources>
