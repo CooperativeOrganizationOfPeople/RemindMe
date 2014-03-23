@@ -7,6 +7,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -81,7 +82,7 @@ public class MainActivity extends Activity {
     	setContentView(R.layout.main_screen);
     }
     
-    public void addEvent(View button){
+    public void addEvent(View view){
     	
     	EditText inputField = (EditText) findViewById(R.id.nameField);
     	String name = inputField.getText().toString();
@@ -102,6 +103,11 @@ public class MainActivity extends Activity {
     	System.out.println(newEvent._description);
     	System.out.println(newEvent._location);
     	System.out.println(newEvent._category);
+    	
+    	Log.v("ERROR", name);
+    	Log.v("ERROR", description);
+    	Log.v("ERROR", location);
+    	Log.v("ERROR", category);
     	
     	//store Event in the db
     	
