@@ -27,7 +27,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private static final String INTEGER = " INTEGER";
 	private static final String TEXT = " TEXT";
 	private static final String PRIMARY_KEY = " PRIMARY KEY";
-	private static final String DATETIME = "DATETIME";
 	/*
 	 * Table Format
 	 * int id  - Primary Key
@@ -58,9 +57,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_EVENTS_TABLE = "CREATE TABLE " + TABLE_EVENTS + "("
-				+ KEY_ID +INTEGER +PRIMARY_KEY+"," + NAME +TEXT+ "," + START_TIME +DATETIME+","
+				+ KEY_ID +INTEGER +PRIMARY_KEY+"," + NAME +TEXT+ "," + START_TIME +TEXT+","
 				+ DESCRIPTION +TEXT+","+ LOCATION +TEXT+","+ CATEGORY +TEXT+","+ REMINDER 
-				+DATETIME+","+ FREQUENCY +TEXT+ ")";
+				+TEXT+","+ FREQUENCY +TEXT+ ")";
 		db.execSQL(CREATE_EVENTS_TABLE);
 /*		String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "(" + NAME+ TEXT + PRIMARY_KEY+")";
 		db.execSQL(CREATE_CATEGORIES_TABLE);
@@ -123,12 +122,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		Event event = new Event();
 		event.setID(Integer.parseInt(cursor.getString(0)));
 		event.setName(cursor.getString(1));
-		//TODO: Figure out how to convert datetimes
-		//event.setEventStart(DateFormat.cursor.getString(2));
+		event.setEventStart(cursor.getString(2));
 		event.setDescription(cursor.getString(3));
 		event.setLocation(cursor.getString(4));
 		event.setCategory(cursor.getString(5));
-		//event.setReminder(cursor.getString(6));
+		event.setReminder(cursor.getString(6));
 		event.setFrequency(cursor.getString(7));
 		// return event
 		return event;

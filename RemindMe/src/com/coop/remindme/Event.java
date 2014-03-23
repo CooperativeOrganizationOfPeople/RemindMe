@@ -1,16 +1,14 @@
 package com.coop.remindme;
 
-import java.text.DateFormat;
-
 public class Event {
 	
 	//private variables
 	int _id;
 	String _name;
-	DateFormat _event_start;
+	String _event_start;
 	String _description;
 	String _location;
-	DateFormat _reminder;
+	String _reminder;
 	String _frequency;
 	String _category;
 
@@ -20,7 +18,7 @@ public class Event {
 	}
 
 	// Constructor
-	public Event(int id, String name, DateFormat event_start, String description, String location, DateFormat reminder, String frequency, String category){
+	public Event(int id, String name, String event_start, String description, String location, String reminder, String frequency, String category){
 		this._id = id;
 		this._name = name;
 		this._event_start = event_start;
@@ -31,7 +29,7 @@ public class Event {
 		this._category = category;
 	}
 
-	public Event(String name, DateFormat event_start, String description, String location, DateFormat reminder, String frequency, String category){
+	public Event(String name, String event_start, String description, String location, String reminder, String frequency, String category){
 		this._name = name;
 		this._event_start = event_start;
 		this._description = description;
@@ -70,12 +68,12 @@ public class Event {
 	}
 
 	// Get Event Start
-	public DateFormat getEventStart(){
+	public String getEventStart(){
 		return this._event_start;
 	}
 
 	// Set Event Start
-	public void setEventStart(DateFormat event_start){
+	public void setEventStart(String event_start){
 		this._event_start = event_start;
 	}
 
@@ -100,12 +98,12 @@ public class Event {
 	}
 
 	// Get Reminder
-	public DateFormat getReminder(){
+	public String getReminder(){
 		return this._reminder;
 	}
 
 	// Set Reminder
-	public void setReminder(DateFormat reminder){
+	public void setReminder(String reminder){
 		this._reminder = reminder;
 	}	
 
