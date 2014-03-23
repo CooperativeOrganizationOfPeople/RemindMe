@@ -86,11 +86,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		ContentValues values = new ContentValues();
 		values.put(NAME, event.getName()); // Event Name
-		values.put(START_TIME, event.getEventStart().toString());
+		values.put(START_TIME, event.getEventStart());
 		values.put(DESCRIPTION, event.getDescription());
 		values.put(LOCATION, event.getLocation());
 		values.put(CATEGORY, event.getCategory());
-		values.put(REMINDER, event.getReminder().toString());
+		values.put(REMINDER, event.getReminder());
 		values.put(FREQUENCY, event.getFrequency());
 		
 		// Inserting Row

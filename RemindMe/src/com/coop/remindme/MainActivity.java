@@ -121,9 +121,8 @@ public class MainActivity extends Activity {
     	String location = inputField.getText().toString();
 
     	//starttime
-    	String eventStart = year+'-'+month+'-'+day+' '+hour+':'+minute+":00";
+    	String eventStart = year+"-"+String.format("%02d",month)+"-"+String.format("%02d",day)+" "+String.format("%02d",hour)+":"+String.format("%02d",minute)+":00";
     	
-    	//freq - TODO
     	inputField = (EditText) findViewById(R.id.frequencyField);
     	int frequencyNumber = Integer.parseInt(inputField.getText().toString());
     	Spinner spin = (Spinner) findViewById(R.id.spinFreq);
@@ -136,18 +135,26 @@ public class MainActivity extends Activity {
     	
     	//reminder
     	spin = (Spinner) findViewById(R.id.spinReminder);
-    	String stringReminder = inputField.getText().toString();
+    	String stringReminder = spin.getSelectedItem().toString();
     	String reminder = getDateFormatForReminder(eventStart, stringReminder);
     	
     	
     	//debug logging
+    	Log.d("Name: ",name);
+    	Log.d("Description: ",description);
+    	Log.d("Location: ",location);
+    	Log.d("Category: ",category);
+    	Log.d("Reminder: ",reminder);
+    	Log.d("Event Start: ",eventStart);
+    	Log.d("Frequency: ",frequency);
+    	/*
     	System.out.println(name);
     	System.out.println(description);
     	System.out.println(location);
     	System.out.println(category);
     	System.out.println(reminder);
     	System.out.println(eventStart);
-    	System.out.println(frequency);
+    	System.out.println(frequency);*/
     	
     	
     	boolean isValid = false;
