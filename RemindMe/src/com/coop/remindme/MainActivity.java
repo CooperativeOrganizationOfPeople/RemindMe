@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.EditText;
+
 public class MainActivity extends Activity {
 	
 	private int year;
@@ -75,6 +76,11 @@ public class MainActivity extends Activity {
     	setContentView(R.layout.activity_create_event);
     }
     
+    //Return
+    public void returnToHome(View view){
+    	setContentView(R.layout.main_screen);
+    }
+    
     public void addEvent(View button){
     	
     	EditText inputField = (EditText) findViewById(R.id.nameField);
@@ -91,10 +97,13 @@ public class MainActivity extends Activity {
     	
     	Event newEvent = new Event(name, description, location, category);
    
+    	//print stuff to show that it's being logged
     	System.out.println(newEvent._name);
     	System.out.println(newEvent._description);
     	System.out.println(newEvent._location);
     	System.out.println(newEvent._category);
+    	
+    	//store Event in the db
     	
     }
 
