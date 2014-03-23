@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -102,30 +103,70 @@ public class MainActivity extends Activity {
     
     public void addEvent(View view){
     	
+    	//name
     	EditText inputField = (EditText) findViewById(R.id.nameField);
     	String name = inputField.getText().toString();
 
+    	//description
     	inputField = (EditText) findViewById(R.id.descriptionField);
     	String description = inputField.getText().toString();
     	
+    	//location
     	inputField = (EditText) findViewById(R.id.locationField);
     	String location = inputField.getText().toString();
+
+    	//starttime
+    	DateFormat startTime = new DateFormat();
     	
+    	//freq - TODO
+    	
+    	//category
     	Spinner spin = (Spinner) findViewById(R.id.spinCat);
     	String category = spin.getSelectedItem().toString();
     	
-    	Event newEvent = new Event(name, description, location, category);
-   
-    	//print stuff to show that it's being logged
-    	System.out.println(newEvent._name);
-    	System.out.println(newEvent._description);
-    	System.out.println(newEvent._location);
-    	System.out.println(newEvent._category);
+    	//reminder
+    	spin = (Spinner) findViewById(R.id.spinReminder);
+    	String stringReminder = inputField.getText().toString();
+    	DateFormat reminder = getDateFormatForReminder(startTime, stringReminder);
     	
-    	//store Event in the db
     	
-    	setContentView(R.layout.main_screen);
+    	//debug logging
+    	System.out.println(name);
+    	System.out.println(description);
+    	System.out.println(location);
+    	System.out.println(category);
+    	System.out.println(reminder);
     	
+    	
+    	boolean isValid = false;
+    	
+    	//do error checking here
+    	
+    	
+    	//if all fields are ok, create new event, save, and return to home screen
+    	if (isValid) {
+    		Event newEvent = new Event(name, description, location, category);
+    		//store Event in the db
+    	
+    	   
+    		setContentView(R.layout.main_screen);
+    	} else {
+    		//put a pop-up here to say something is effed up.
+    	}
+    	
+    }
+    
+    //helper method to generate DateFormat from string that the form gives us
+    private DateFormat getDateFormatForReminder(DateFormat eventStart, String reminderString){
+    	DateFormat output = new DateFormat();
+    	
+    	//parse time reminder out of string
+    	
+    	//calculate difference based on event start
+    	
+    	//store in output
+    	
+    	return output;
     }
 
 }
