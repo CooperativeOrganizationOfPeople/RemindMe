@@ -9,8 +9,10 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.EditText;
 
@@ -35,7 +37,7 @@ public class MainActivity extends Activity {
     private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener(){
         public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDay) {
         	year = selectedYear;
-        	month = selectedMonth;
+        	month = selectedMonth + 1;
         	day = selectedDay;
         	((Button)findViewById(R.id.selectDate)).setText(month+"/"+day+"/"+year);
         	
@@ -75,6 +77,15 @@ public class MainActivity extends Activity {
     
     public void createEvent(View view){
     	setContentView(R.layout.activity_create_event);
+    	
+    	Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+    	// Create an ArrayAdapter using the string array and a default spinner layout
+    	ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
+    	       R.array.Frequency_type, android.R.layout.simple_spinner_item);
+    	// Specify the layout to use when the list of choices appears
+    	adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    	// Apply the adapter to the spinner
+    	spinner1.setAdapter(adapter1);
     }
     
     //Return

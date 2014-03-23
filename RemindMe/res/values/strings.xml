@@ -12,6 +12,13 @@
     <string name="Category_label">Category</string>
     <string name="button_save">Save</string>
     <string name="button_cancel">Cancel</string>
+    <string-array name="Frequency_type">
+        <item>Mins</item>
+        <item>Hours</item>
+        <item>Days</item>
+        <item>Weeks</item>
+        <item>Years</item>
+    </string-array>
     <string name="create_new">Create New Event</string>
     <string name="button_date">Select Event Date</string>
     <string name="button_time">Select Event Time</string>
