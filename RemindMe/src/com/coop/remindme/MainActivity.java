@@ -1,6 +1,8 @@
 package com.coop.remindme;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -26,12 +28,20 @@ public class MainActivity extends Activity {
 	
 	static final int DATE_PICKER_ID = 1;
 	static final int TIME_PICKER_ID = 2;
-
+	DatabaseHandler db;
+	static final List<String> list = new ArrayList<String>();
+	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DatabaseHandler database;
+        db = new DatabaseHandler(this);
+        list.add("Household");
+        list.add("Appointment");
+        list.add("Car");
+        list.add("Meeting");
+        list.add("Health");
         setContentView(R.layout.main_screen);
+        
     }
     
     private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener(){
@@ -78,12 +88,11 @@ public class MainActivity extends Activity {
     public void createEvent(View view){
     	setContentView(R.layout.activity_create_event);
     	
-    	Spinner spinner1 = (Spinner) findViewById(R.id.spinner1);
+    	Spinner spinner1 = (Spinner) findViewById(R.id.spinCat);
     	// Create an ArrayAdapter using the string array and a default spinner layout
-    	ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-    	       R.array.Frequency_type, android.R.layout.simple_spinner_item);
-    	// Specify the layout to use when the list of choices appears
+    	ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, list);
     	adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    	// Specify the layout to use when the list of choices appears
     	// Apply the adapter to the spinner
     	spinner1.setAdapter(adapter1);
     }
@@ -104,8 +113,8 @@ public class MainActivity extends Activity {
     	inputField = (EditText) findViewById(R.id.locationField);
     	String location = inputField.getText().toString();
     	
-    	inputField = (EditText) findViewById(R.id.categoryField);
-    	String category = inputField.getText().toString();
+    	Spinner spin = (Spinner) findViewById(R.id.spinCat);
+    	String category = spin.getSelectedItem().toString();
     	
     	Event newEvent = new Event(name, description, location, category);
    

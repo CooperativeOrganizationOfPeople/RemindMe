@@ -19,8 +19,21 @@
         <item>Weeks</item>
         <item>Years</item>
     </string-array>
+    <string-array name="Reminder_type">
+        <item>0 min</item>
+        <item>5 min</item>
+        <item>15 min</item>
+        <item>30 min</item>
+        <item>1 hr</item>
+        <item>2 hr</item>
+        <item>6 hr</item>
+        <item>1 day</item>
+        <item>1 week</item>
+    </string-array>
     <string name="create_new">Create New Event</string>
     <string name="button_date">Select Event Date</string>
     <string name="button_time">Select Event Time</string>
+    <string name="frequency">Frequency:</string>
+    <string name="reminder">Event Reminder:</string>
     
 </resources>

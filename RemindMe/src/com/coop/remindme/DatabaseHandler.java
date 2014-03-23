@@ -62,13 +62,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ DESCRIPTION +TEXT+","+ LOCATION +TEXT+","+ CATEGORY +TEXT+","+ REMINDER 
 				+DATETIME+","+ FREQUENCY +TEXT+ ")";
 		db.execSQL(CREATE_EVENTS_TABLE);
-		String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "(" + NAME+ TEXT + PRIMARY_KEY+")";
+/*		String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "(" + NAME+ TEXT + PRIMARY_KEY+")";
 		db.execSQL(CREATE_CATEGORIES_TABLE);
 		addCategory("Household");
 		addCategory("Appointment");
 		addCategory("Meeting");
 		addCategory("Car");
-		addCategory("Health");
+		addCategory("Health");*/
 	}
 
 	// Upgrading database
