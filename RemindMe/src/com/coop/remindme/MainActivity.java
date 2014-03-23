@@ -61,7 +61,7 @@ public class MainActivity extends Activity {
         public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
         	hour = selectedHour;
         	minute = selectedMinute;
-        	((Button)findViewById(R.id.selectTime)).setText(hour+":"+minute);
+        	((Button)findViewById(R.id.selectTime)).setText(String.format("%02d", hour)+":"+String.format("%02d", minute));
         }
     };
     
