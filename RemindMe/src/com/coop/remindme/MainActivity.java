@@ -1,8 +1,12 @@
 package com.coop.remindme;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -31,6 +35,7 @@ public class MainActivity extends Activity {
 	static final int TIME_PICKER_ID = 2;
 	DatabaseHandler db;
 	static final List<String> list = new ArrayList<String>();
+	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +107,7 @@ public class MainActivity extends Activity {
     }
     
     public void addEvent(View view){
-    	
+
     	//name
     	EditText inputField = (EditText) findViewById(R.id.nameField);
     	String name = inputField.getText().toString();
@@ -116,18 +121,23 @@ public class MainActivity extends Activity {
     	String location = inputField.getText().toString();
 
     	//starttime
-    	DateFormat startTime = new DateFormat();
+    	String eventStart = year+'-'+month+'-'+day+' '+hour+':'+minute+":00";
     	
     	//freq - TODO
+    	inputField = (EditText) findViewById(R.id.frequencyField);
+    	int frequencyNumber = Integer.parseInt(inputField.getText().toString());
+    	Spinner spin = (Spinner) findViewById(R.id.spinFreq);
+    	String freq = spin.getSelectedItem().toString();
+    	String frequency = freq + " " + frequencyNumber;
     	
     	//category
-    	Spinner spin = (Spinner) findViewById(R.id.spinCat);
+    	spin = (Spinner) findViewById(R.id.spinCat);
     	String category = spin.getSelectedItem().toString();
     	
     	//reminder
     	spin = (Spinner) findViewById(R.id.spinReminder);
     	String stringReminder = inputField.getText().toString();
-    	DateFormat reminder = getDateFormatForReminder(startTime, stringReminder);
+    	String reminder = getDateFormatForReminder(eventStart, stringReminder);
     	
     	
     	//debug logging
@@ -136,18 +146,20 @@ public class MainActivity extends Activity {
     	System.out.println(location);
     	System.out.println(category);
     	System.out.println(reminder);
+    	System.out.println(eventStart);
+    	System.out.println(frequency);
     	
     	
     	boolean isValid = false;
     	
     	//do error checking here
-    	
+    	isValid = true;
     	
     	//if all fields are ok, create new event, save, and return to home screen
     	if (isValid) {
-    		Event newEvent = new Event(name, description, location, category);
+    		Event newEvent = new Event(name, eventStart, description, location, reminder, frequency, category);
     		//store Event in the db
-    	
+    		db.addEvents(newEvent);
     	   
     		setContentView(R.layout.main_screen);
     	} else {
@@ -157,16 +169,42 @@ public class MainActivity extends Activity {
     }
     
     //helper method to generate DateFormat from string that the form gives us
-    private DateFormat getDateFormatForReminder(DateFormat eventStart, String reminderString){
-    	DateFormat output = new DateFormat();
-    	
+    private String getDateFormatForReminder(String eventStart, String reminderString){
     	//parse time reminder out of string
-    	
     	//calculate difference based on event start
-    	
     	//store in output
+    	Date start;
+    	try{
+    		start= dateFormat.parse(eventStart);
+    		Calendar cal = Calendar.getInstance();
+        	cal.setTime(start);
+        	if(reminderString.equals("0 min"))
+        		cal.add(Calendar.MINUTE, 0);
+        	else if(reminderString.equals("5 min"))
+        		cal.add(Calendar.MINUTE, 5);
+        	else if(reminderString.equals("15 min"))
+        		cal.add(Calendar.MINUTE, 15);
+        	else if(reminderString.equals("30 min"))
+        		cal.add(Calendar.MINUTE, 30);
+        	else if(reminderString.equals("1 hr"))
+        		cal.add(Calendar.HOUR, 1);
+        	else if(reminderString.equals("2 hr"))
+        		cal.add(Calendar.HOUR, 2);
+        	else if(reminderString.equals("6 hr"))
+        		cal.add(Calendar.HOUR, 6);
+        	else if(reminderString.equals("1 day"))
+        		cal.add(Calendar.DAY_OF_MONTH, 1);
+        	else if(reminderString.equals("1 week"))
+        		cal.add(Calendar.WEEK_OF_YEAR, 1);
+        	
+        	return dateFormat.format(cal.getTime());
+    	}
+    	catch(ParseException pe)
+    	{
+    		System.out.println(pe);
+    	}
+    	return eventStart;
     	
-    	return output;
     }
 
 }
