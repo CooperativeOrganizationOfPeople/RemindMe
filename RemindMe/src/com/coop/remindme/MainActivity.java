@@ -115,15 +115,11 @@ public class MainActivity extends Activity {
     	System.out.println(newEvent._location);
     	System.out.println(newEvent._category);
     	
-    	Log.v("ERROR", name);
-    	Log.v("ERROR", description);
-    	Log.v("ERROR", location);
-    	Log.v("ERROR", category);
-    	
     	//store Event in the db
     	
+    	setContentView(R.layout.main_screen);
+    	
     }
-
 
 }
 
