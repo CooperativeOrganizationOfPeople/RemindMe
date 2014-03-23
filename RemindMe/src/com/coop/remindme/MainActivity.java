@@ -117,9 +117,8 @@ public class MainActivity extends Activity {
     	inputField = (EditText) findViewById(R.id.locationField);
     	String location = inputField.getText().toString();
 
-    	//date - TODO
-
-    	//time - TODO
+    	//starttime
+    	DateFormat startTime = new DateFormat();
     	
     	//freq - TODO
     	
@@ -130,20 +129,23 @@ public class MainActivity extends Activity {
     	//reminder
     	spin = (Spinner) findViewById(R.id.spinReminder);
     	String stringReminder = inputField.getText().toString();
-    	DateFormat reminder = getDateFormatForReminder(stringReminder);
+    	DateFormat reminder = getDateFormatForReminder(startTime, stringReminder);
     	
     	
-    	boolean isValid = false;
-    	//do error checking here
-    	
-   
-    	//print stuff to show that it's being logged
+    	//debug logging
     	System.out.println(name);
     	System.out.println(description);
     	System.out.println(location);
     	System.out.println(category);
     	System.out.println(reminder);
     	
+    	
+    	boolean isValid = false;
+    	
+    	//do error checking here
+    	
+    	
+    	//if all fields are ok, create new event, save, and return to home screen
     	if (isValid) {
     		Event newEvent = new Event(name, description, location, category);
     		//store Event in the db
@@ -156,8 +158,16 @@ public class MainActivity extends Activity {
     	
     }
     
-    private DateFormat getDateFormatForReminder(String reminderString){
+    //helper method to generate DateFormat from string that the form gives us
+    private DateFormat getDateFormatForReminder(DateFormat eventStart, String reminderString){
     	DateFormat output = new DateFormat();
+    	
+    	//parse time reminder out of string
+    	
+    	//calculate difference based on event start
+    	
+    	//store in output
+    	
     	return output;
     }
 
