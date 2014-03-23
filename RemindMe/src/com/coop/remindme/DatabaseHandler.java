@@ -20,6 +20,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// Events table name
 	private static final String TABLE_EVENTS = "events";
+	// Categories table name
+	private static final String TABLE_CATEGORIES = "categories";
 
 	// SQL types
 	private static final String INTEGER = " INTEGER";
@@ -55,11 +57,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	// Creating Tables
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_EVENTS + "("
+		String CREATE_EVENTS_TABLE = "CREATE TABLE " + TABLE_EVENTS + "("
 				+ KEY_ID +INTEGER +PRIMARY_KEY+"," + NAME +TEXT+ "," + START_TIME +DATETIME+","
 				+ DESCRIPTION +TEXT+","+ LOCATION +TEXT+","+ CATEGORY +TEXT+","+ REMINDER 
 				+DATETIME+","+ FREQUENCY +TEXT+ ")";
-		db.execSQL(CREATE_CONTACTS_TABLE);
+		db.execSQL(CREATE_EVENTS_TABLE);
+		String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "(" + NAME+ TEXT + PRIMARY_KEY+")";
+		db.execSQL(CREATE_CATEGORIES_TABLE);
+		addCategory("Household");
+		addCategory("Appointment");
+		addCategory("Meeting");
+		addCategory("Car");
+		addCategory("Health");
 	}
 
 	// Upgrading database
@@ -73,7 +82,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	}
 	
 	// Adding new event
-	public void addContact(Event event) {
+	public void addEvents(Event event) {
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
@@ -88,6 +97,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		// Inserting Row
 		db.insert(TABLE_EVENTS, null, values);
 		db.close(); // Closing database connection
+	}
+	
+	public void addCategory(String category) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		ContentValues value = new ContentValues();
+		value.put(NAME, category);
+		db.insert(TABLE_CATEGORIES, null, value);
+		db.close();
 	}
 	
 	// Getting single event
@@ -119,7 +136,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		
 	// Getting All Events
 	public List<Event> getAllEvents() {
-		List<Event> contactList = new ArrayList<Event>();
+		List<Event> eventList = new ArrayList<Event>();
 		// Select All Query
 		String selectQuery = "SELECT  * FROM " + TABLE_EVENTS;
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -138,15 +155,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			event.setCategory(cursor.getString(5));
 			//event.setReminder(cursor.getString(6));
 			event.setFrequency(cursor.getString(7));
-			// Adding contact to list
-			contactList.add(event);
+			// Adding event to list
+			eventList.add(event);
 		} while (cursor.moveToNext());
 	}
 
-	// return contact list
-	return contactList;
+	// return event list
+	return eventList;
 }
-		 
+	
+	// Getting All Categories
+	public List<String> getAllCategories() {
+		List<String> categories = new ArrayList<String>();
+		// Select All Query
+		String selectQuery = "SELECT * FROM " + TABLE_CATEGORIES;
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery,  null);
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				// Adding event to list
+				categories.add(cursor.getString(0));
+			} while (cursor.moveToNext());
+		}
+		// return category list
+		return categories;
+	}
+	
+	// Getting categories count
+	public int getCategoriesCount() {
+		String countQuery = "SELECT * FROM " + TABLE_CATEGORIES;
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor cursor = db.rawQuery(countQuery, null);
+		cursor.close();
+		// return count
+		return cursor.getCount();
+	}
+	
 	// Getting events Count
 	public int getEventsCount() {
 		String countQuery = "SELECT  * FROM " + TABLE_EVENTS;
