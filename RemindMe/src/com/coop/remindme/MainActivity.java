@@ -41,7 +41,6 @@ public class MainActivity extends Activity {
         list.add("Meeting");
         list.add("Health");
         setContentView(R.layout.main_screen);
-        
     }
     
     private DatePickerDialog.OnDateSetListener pickerListener = new DatePickerDialog.OnDateSetListener(){
@@ -50,7 +49,6 @@ public class MainActivity extends Activity {
         	month = selectedMonth + 1;
         	day = selectedDay;
         	((Button)findViewById(R.id.selectDate)).setText(month+"/"+day+"/"+year);
-        	
         }
     };
     private TimePickerDialog.OnTimeSetListener pickerListener2 = new TimePickerDialog.OnTimeSetListener(){
