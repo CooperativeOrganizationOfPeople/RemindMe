@@ -113,7 +113,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <Spinner
-            android:id="@+id/Spinner01"
+            android:id="@+id/spinReminder"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
